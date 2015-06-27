@@ -4,7 +4,7 @@ import java.util.Formatter;
  *  @author P. N. Hilfinger, with some modifications by Josh Hug and melaniecebula
  *  [Do not modify this file.]
  */
-public class IntList {
+public static class IntList {
   /** First element of list. */
   public int head;
   /** Remaining elements of list. */
@@ -17,10 +17,10 @@ public class IntList {
   }
 
   /** A List with null tail, and head = 0. */
-  public IntList() {
+ // public IntList() {
     /* NOTE: public IntList () { }  would also work. */
-    this(0, null);
-  }
+   // this(0, null);
+  //}
 
   /** Returns a list equal to L with all elements squared. Destructive. */
   public static void dSquareList(IntList L) {
@@ -62,15 +62,23 @@ public class IntList {
    **  elements of B.  May modify items of A. Don't use 'new'. */
 
   public static IntList dcatenate(IntList A, IntList B) {
-    //TODO:  fill in method
-    return null;
+    while(A.tail !=null){
+      A=A.tail;
+    }
+    A.tail=B;
+    return A;
+   // return null;
   }
 
   /** Returns a list consisting of the elements of A followed by the
    ** elements of B.  May NOT modify items of A.  Use 'new'. */
   public static IntList catenate(IntList A, IntList B) {
     //TODO:  fill in method
-    return null;
+      if (A == null) {
+      return B;
+    }
+    return new IntList(A.head, catenate(A.tail, B));
+  }
   }
 
 

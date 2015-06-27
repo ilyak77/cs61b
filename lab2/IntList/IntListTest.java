@@ -39,6 +39,21 @@ public class IntListTest {
 
     //TODO:  Create testSquareListRecursive()
     //TODO:  Create testDcatenate and testCatenate
+    @Test
+    public void testDCatenate() {
+      IntList A = IntList.list(1, 2, 3);
+      IntList B = IntList.list(4, 5, 6);
+       IntList L = IntList.dcatenate(A, B);
+      assertEquals(IntList.list(1, 2,3,4,5,6), L);
+    }
+
+    @Test
+    public void testCatenate() {
+      IntList A = IntList.list(1, 2, 3);
+      IntList B = IntList.list(4, 5, 6);
+      IntList L = IntList.catenate(A, B);
+      assertEquals(IntList.list(1, 2,3,4,5,6), L);
+    }
 
     /* Run the unit tests in this file. */
     public static void main(String... args) {

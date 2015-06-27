@@ -22,12 +22,23 @@ public class TriangleTest {
 
     @Test
     public void testEquilateral() {
-      //TODO: FILL IN
+      Triangle t=new Triangle(30,30,30);
+      String result = t.triangleType();
+      assertEquals("Equilateral", result);
     }
 
     //TODO: CREATE MORE TESTS
-
-    public static void main(String[] args) {
+    @Test
+    public void testIsosceles() {
+      Triangle t=new Triangle(30,30,20);
+      String result = t.triangleType();
+      assertEquals("Isosceles", result);
+    }
+   
+    
+    public static void main(String... args) {
       //TODO: RUN TESTS (Look in ArithmeticTest.java main method for help!)
+    	 jh61b.junit.textui.runClasses(TriangleTest.class);
     }
 }
+
