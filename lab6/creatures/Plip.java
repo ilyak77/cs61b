@@ -41,9 +41,17 @@ public class Plip extends Creature {
      *  that you get this exactly correct.
      */
     public Color color() {
-        g = 63;
-        return color(r, g, b);
+        r=99;
+        b=76;
+        g=63+96*energy;
+        System.out.println(r);
+        System.out.println(g);
+        System.out.println(b);
+       
+        return Color(r, g, b);
     }
+
+   
 
     /** Do nothing with C, Plips are pacifists. */
     public void attack(Creature c) {
@@ -54,11 +62,14 @@ public class Plip extends Creature {
      *  private static final variable. This is not required for this lab.
      */
     public void move() {
+        energy -= 0.15;
+
     }
 
 
     /** Plips gain 0.2 energy when staying due to photosynthesis. */
     public void stay() {
+        energy += 0.2;
     }
 
     /** Plips and their offspring each get 50% of the energy, with none
@@ -66,6 +77,11 @@ public class Plip extends Creature {
      *  Plip.
      */
     public Plip replicate() {
+       /* Plip babyPlip= new Plip();
+        babyPlip.energy=energy/2;
+        energy = energy/2;
+        
+        return babyPlip;*/
         return this;
     }
 
@@ -80,6 +96,24 @@ public class Plip extends Creature {
      *  for an example to follow.
      */
     public Action chooseAction(Map<Direction, Occupant> neighbors) {
-        return new Action(Action.ActionType.STAY);
+        //find the number of empty position
+     /*   List<Direction> empties = getNeighborsOfType(neighbors, "empty");
+        if (empties.sieze()!=0){
+            if (energy >= 1) {
+                return new Action(Action.ActionType.REPLICATE);
+            }
+         
+            if (Cloruses) {
+                if (HugLifeUtils.random() < 0.5) {
+                Direction moveDir = HugLifeUtils.randomEntry(empties);
+                return new Action(Action.ActionType.MOVE, moveDir);
+            }
+        }
+        else{
+            return new Action(Action.ActionType.STAY);
+        }
+    }*/
+
+       return new Action(Action.ActionType.STAY);
     }
 }

@@ -1,19 +1,19 @@
 Q1.
-(a) 
-(b) 
-(c) 
-(d) 
-(e) 
-(f) 
+(a) SuperAnimal
+(b) No
+(c) I'm animal
+(d) Yes
+(e) None
+(f) dynamic-not sure
 
 Q2.
-(a) 
-(b) 
-(c) 
-(d) 
+(a) A
+(b) I'm animal
+(c) I'm animal
+(d) static
 
 Q3.
-(a) 
-(b) 
-(c) 
-(d) 
+(a) False
+(b) SuperAnimal
+(c) SuperAnimal
+(d) static

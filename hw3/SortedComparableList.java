@@ -12,29 +12,53 @@ public class SortedComparableList {
 
     /** A list with head HEAD0 and tail TAIL0. */
     public SortedComparableList(Comparable head0, SortedComparableList tail0) {
-        // REPLACE THIS LINE WITH YOUR SOLUTION
+        head=head0;
+        tail=tail0;
     }
 
     /** A list with null tail, and head = 0. */
     public SortedComparableList(){
-        // REPLACE THIS LINE WITH YOUR SOLUTION
+        head=0;
+        tail=null;
     }
 
     /** Inserts Comparable c into its correct location in this list. */
     public void insert(Comparable c) {
-        // REPLACE THIS LINE WITH YOUR SOLUTION
+        SortedComparableList s=this;
+        int i;
+        if(tail ==null){
+           s=new SortedComparableList(c,null);
+        }
+
+        while(tail!=null){
+            if(i=(int)s.head.size-c.size >0){
+               s= new SortedComparableList(c,s);
+               break;
+            }  
+            s=s.tail; 
+        }
     }
 
     /** Returns the i-th int in this list.
      *  The first element, which is in location 0, is the 0th element.
      *  Assume i takes on the values [0, length of list - 1]. */
     public Comparable get(int i) {
-        return null; // REPLACE THIS LINE WITH YOUR SOLUTION
+        if(i==0){
+            return head;
+        }
+
+        return tail.get(i-1);
+
     }
 
     /** Adds every item in THAT to this list. */
     public void extend(SortedComparableList that) {
-        // REPLACE THIS LINE WITH YOUR SOLUTION
+        SortedComparableList s=that;
+        while(s.tail !=null){
+        insert(s.head);
+        s= s.tail;
+        
+     }
     }
 
     /** Returns a list consisting of the elements of L starting from
@@ -43,7 +67,14 @@ public class SortedComparableList {
       *
       * This method should NOT modify L. */
     public static SortedComparableList subTail(SortedComparableList L, int start) {
-        return null; // REPLACE THIS LINE WITH YOUR SOLUTION
+        SortedComparableList s=this;
+        int i=0;
+        if (start==0) return s;
+        while(i<start){
+            s=s.tail;
+            i++;
+        }
+        return s;
     }
 
     /** Returns the sublist consisting of LEN items from list L,
@@ -53,12 +84,30 @@ public class SortedComparableList {
      *  Assume START and END are >= 0.
      */
     public static SortedComparableList sublist(SortedComparableList L, int start, int len) {
-        return null; // REPLACE THIS LINE WITH YOUR SOLUTION
+        SortedComparableList s= expungeTail(L,len);
+        s=subTail(s,start);
     }
+
+    /*s1=new(s.head,null)
+      s=s.tail;
+      s1.tail=new(s.head,null)
+          ...
+
+     */
 
     /** Removes items from L at position len+1 and later. */
     public static void expungeTail(SortedComparableList L, int len) {
-        // REPLACE THIS LINE WITH YOUR SOLUTION
+        SortedComparableList s=L;
+        int i=0;
+
+        if(len==0) L=null;
+
+        while(i<len){
+         s=s.tail;
+         i++;
+        }
+        s=null;
+
     }
 
     /**
@@ -74,7 +123,13 @@ public class SortedComparableList {
      *  output list is [ 0 1 3 4 ].
      **/
     public void squish() {
-        // REPLACE THIS LINE WITH YOUR SOLUTION
+        SortedComparableList s=this;
+        while(s.tail!=null){
+            if(s.head ==s.tail.head){
+                s=new SortedComparableList()
+
+            }
+        }
     }
 
     /** Duplicates each Comparable so that for every original
