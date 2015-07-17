@@ -22,13 +22,13 @@ public interface Map61B<K, V> {
     public void put(K key, V value);
 
     /* Removes the mapping for the specified key from this map if present.
-     * Not required for HW6. */
+     * Not required for HW6.
     public V remove(K key);
 
     /* Removes the entry for the specified key only if it is currently mapped to
-     * the specified value. Not required for HW6a. */
+     * the specified value. Not required for HW6a. 
     public V remove(K key, V value);
 
-    /* Returns a Set view of the keys contained in this map. Not required for HW6. */
-    public Set<K> keySet();    
+    /* Returns a Set view of the keys contained in this map. Not required for HW6. 
+    public Set<K> keySet();  */  
 }

@@ -1,93 +1,161 @@
-import java.util.Set; /* java.util.Set needed only for challenge problem. */
+import java.util.Set; 
+import java.util.NoSuchElementException;
+import java.util.Iterator;
+import java.util.HashSet;
 
-/** A data structure that uses a linked list to store pairs of keys and values.
- *  Any key must appear at most once in the dictionary, but values may appear multiple
- *  times. Supports get(key), put(key, value), and contains(key) methods. The value
- *  associated to a key is the value in the last call to put with that key. 
- *
- *  For simplicity, you may assume that nobody ever inserts a null key or value
- *  into your map.
- */ 
-public class ULLMap { //FIX ME
-    /** Keys and values are stored in a linked list of Entry objects.
-      * This variable stores the first pair in this linked list. You may
-      * point this at a sentinel node, or use it as a the actual front item
-      * of the linked list. 
-      */
+public class ULLMap<K,V> implements  Map61B<K,V> , Iterable<K>{ 
+   
     private Entry front;
+    private int N;
 
-    @Override
-    public get(key) { //FIX ME
-    //FILL ME IN
-        return null; //FIX ME
+    public Iterator<K> iterator(){
+        return new ULLMapIter();
     }
 
-    @Override
-    public void put(key, val) { //FIX ME
-    //FILL ME IN
+    private class ULLMapIter implements Iterator<K>{
+      //  front=new()
+        private Entry e=front;
+
+        public boolean hasNext(){
+            return (e.next!=null);
+        }
+
+        public K next(){
+            
+            if(e==null) return null;
+            
+            K key=e.key; 
+            e=e.next;
+            
+            return key;
+        }
+
+        public void remove(){
+            throw new UnsupportedOperationException();
+        }
     }
 
-    @Override
-    public boolean containsKey(key) { //FIX ME
-    //FILL ME IN
-        return false; //FIX ME
-    }
-
-    @Override
-    public int size() {
-        return 0; // FIX ME (you can add extra instance variables if you want)
-    }
-
-    @Override
-    public void clear() {
-    //FILL ME IN
-    }
-
-
-    /** Represents one node in the linked list that stores the key-value pairs
-     *  in the dictionary. */
     private class Entry {
     
-        /** Stores KEY as the key in this key-value pair, VAL as the value, and
-         *  NEXT as the next node in the linked list. */
-        public Entry(k, v, Entry n) { //FIX ME
+        private K key; 
+        private V val; 
+        private Entry next;
+        
+        public Entry(K k,V v, Entry n) { 
             key = k;
             val = v;
             next = n;
         }
 
-        /** Returns the Entry in this linked list of key-value pairs whose key
-         *  is equal to KEY, or null if no such Entry exists. */
-        public Entry get(k) { //FIX ME
-            //FILL ME IN (using equals, not ==)
-            return null; //FIX ME
+        public Entry get(K k) { 
+            if(this.key.equals(k)) return this;
+            return null; 
         }
 
-        /** Stores the key of the key-value pair of this node in the list. */
-        private key; //FIX ME
-        /** Stores the value of the key-value pair of this node in the list. */
-        private val; //FIX ME
-        /** Stores the next Entry in the linked list. */
-        private Entry next;
+        public K getKey(){
+            return this.key;
+        }
+
+        public V getValue(){
+            return this.val;
+        }
+
+    }
+
+    @Override
+    public V get(K key) {
+        for(Entry e=front; e!=null; e=e.next){
+            if(key.equals(e.key)) return e.val;
+        }
+        return null; 
+    }
+
+    @Override
+    public void put(K key, V val) { 
+        for(Entry e=front; e!=null; e=e.next){
+            if(key.equals(e.key)){
+                e.val=val;
+                return;
+            }
+        }
+        front =new Entry(key,val,front);
+
+        //front.next=new Entry(key,val,null);
+        N++;
+    }
+
+
+    @Override
+    public boolean containsKey(K key) {
+        return get(key) !=null;
+    }
+
+    @Override
+    public int size() {
+        return N; 
+    }
+
+    @Override
+    public void clear() {
+       for(Entry e=front; e!=null; e=e.next){
+            e=null;
+        }
     
     }
 
+
+ 
     /* Methods below are all challenge problems. Will not be graded in any way. 
      * Autograder will not test these. */
     @Override
-    public remove(key) { //FIX ME SO I COMPILE
+    public V remove(K key) { //FIX ME SO I COMPILE
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public remove(key, value) { //FIX ME SO I COMPILE
+    public V remove(K key, V value) { //FIX ME SO I COMPILE
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public Set<> keySet() { //FIX ME SO I COMPILE
-        throw new UnsupportedOperationException();
+    public Set<K> keySet() { //FIX ME SO I COMPILE
+        //throw new UnsupportedOperationException();
+        Set<K> keyset=new HashSet<K>();
+        for(Entry e=front; e!=null; e=e.next){
+            keyset.add(e.key);
+        }
+        return keyset;
     }
 
+   
+    public static <V,K> ULLMap<V,K> InvertMap(ULLMap<K,V> map){
+
+        ULLMap<V,K> invertMap=new ULLMap<V,K>();
+
+        for(K key:map.keySet()){
+            V val=map.get(key);
+            invertMap.put(val,key);
+        }
+        return invertMap;
+    }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -128,19 +128,4 @@ public class ULLMap<K, V>  implements Map61B<K, V>, Iterable<K>{
     
     }
 
-    @Override
-    public V remove(K key) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public V remove(K key, V value) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public Set<K> keySet() {
-        throw new UnsupportedOperationException();
-    }
-
 }
